@@ -8,6 +8,15 @@ from core.serializers import UserSerializer
 # Create your views here.
 
 
+@api_view(['GET'])
+def get_users(request):
+    users = User.objects.all()
+
+    serializer = UserSerializer(data=users)
+
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 def create_user(request):
 
