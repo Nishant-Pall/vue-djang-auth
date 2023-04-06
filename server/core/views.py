@@ -10,9 +10,12 @@ from core.serializers import UserSerializer
 
 @api_view(['POST'])
 def create_user(request):
+
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return Response('USER CREATED', status.HTTP_201_CREATED)
-    return Response('USER NOT CREATED, BAD REQUEST', status.HTTP_201_BAD_REQUEST)
+        return Response({"status": "USER CREATED", "data": serializer.data}, status=status.HTTP_201_CREATED)
+
+    print(serializer.errors)
+    return Response({"status": "USER NOT CREATED", "data": serializer.data}, status=status.HTTP_400_BAD_REQUEST)
