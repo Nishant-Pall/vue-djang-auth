@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from rest_framework import status
 from core.serializers import UserSerializer
 
@@ -12,19 +13,19 @@ from core.serializers import UserSerializer
 def get_users(request):
     users = User.objects.all()
 
-    serializer = UserSerializer(data=users)
-
-    return Response(serializer.data)
+    serializer = UserSerializer(users, many=True)
+    return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
 def create_user(request):
 
-    serializer = UserSerializer(data=request.data)
+    data = JSONParser().parse(request)
+    serializer = UserSerializer(data=data)
 
     if serializer.is_valid():
         serializer.save()
         return Response({"status": "USER CREATED", "data": serializer.data}, status=status.HTTP_201_CREATED)
 
     print(serializer.errors)
-    return Response({"status": "USER NOT CREATED", "data": serializer.data}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"status": "USER NOT CREATED", "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
