@@ -1,19 +1,29 @@
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework import status
+from core.models import User
 from core.serializers import UserSerializer
 
 # Create your views here.
 
 
 @api_view(['GET'])
-def get_users(request):
+def get_all_users(request):
     users = User.objects.all()
 
     serializer = UserSerializer(users, many=True)
+    return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_user(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = UserSerializer(user)
     return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
 
