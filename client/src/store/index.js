@@ -1,3 +1,4 @@
+import { HTTP } from "@/api/api";
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -19,7 +20,9 @@ export default new Vuex.Store({
 	},
 	actions: {
 		createUser: (context, payload) => {
-			context.commit("setCurrentUser", payload);
+			HTTP.post("/create", { ...payload }).then(() => {
+				context.commit("setCurrentUser", payload);
+			});
 		},
 	},
 	modules: {},

@@ -33,9 +33,9 @@ def create_user(request):
     data = JSONParser().parse(request)
     serializer = UserSerializer(data=data)
 
+    print(data)
     if serializer.is_valid():
         serializer.save()
         return Response({"status": "USER CREATED", "data": serializer.data}, status=status.HTTP_201_CREATED)
 
-    print(serializer.errors)
     return Response({"status": "USER NOT CREATED", "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

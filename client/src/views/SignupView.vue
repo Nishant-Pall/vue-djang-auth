@@ -39,7 +39,7 @@ export default {
 			this.loading = true;
 			this.$store.dispatch("createUser", { username: this.username, password: this.password }).finally(() => {
 				this.loading = false;
-				this.$router.push("");
+				// this.$router.push("home");
 			});
 		},
 	},
