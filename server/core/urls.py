@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('create', views.create_user),
     path('users', views.get_all_users),
-    path('users/<str:username>', views.get_user)
+    path('users/<int:id>', views.get_user)
 ]
 
 
