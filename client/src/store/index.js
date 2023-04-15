@@ -20,9 +20,13 @@ export default new Vuex.Store({
 	},
 	actions: {
 		createUser: (context, payload) => {
-			HTTP.post("/create", { ...payload }).then(() => {
-				context.commit("setCurrentUser", payload);
-			});
+			HTTP.post("/create", { ...payload })
+				.then(() => {
+					context.commit("setCurrentUser", payload);
+				})
+				.catch((err) => {
+					console.log(err.message);
+				});
 		},
 	},
 	modules: {},
