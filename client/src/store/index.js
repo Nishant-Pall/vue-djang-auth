@@ -4,9 +4,23 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-	state: {},
+	state: {
+		currentUser: {
+			id: "",
+			username: "",
+			password: "",
+		},
+	},
 	getters: {},
-	mutations: {},
-	actions: {},
+	mutations: {
+		setCurrentUser: (state, payload) => {
+			state.currentUser = payload;
+		},
+	},
+	actions: {
+		createUser: (context, payload) => {
+			context.commit("setCurrentUser", payload);
+		},
+	},
 	modules: {},
 });
