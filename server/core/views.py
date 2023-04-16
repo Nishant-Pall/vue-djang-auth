@@ -27,10 +27,9 @@ def get_user(request, id):
     return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def authenticate_user(request):
     data = JSONParser().parse(request)
-
     try:
         user = User.objects.get(
             username=data['username'], password=data['password'])

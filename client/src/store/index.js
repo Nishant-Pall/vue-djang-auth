@@ -31,7 +31,7 @@ export default new Vuex.Store({
 				});
 		},
 		async authenticateUser(context, payload) {
-			await HTTP.get("/users/authenticate", { ...payload })
+			await HTTP.post("/users/authenticate", { ...payload })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
 					router.push("home");

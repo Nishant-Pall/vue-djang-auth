@@ -7,10 +7,10 @@
 					<v-card-text>
 						<v-container>
 							<v-row>
-								<v-text-field label="Username*" required></v-text-field>
+								<v-text-field label="Username*" required v-model="username"></v-text-field>
 							</v-row>
 							<v-row>
-								<v-text-field label="Password*" required></v-text-field>
+								<v-text-field label="Password*" required v-model="password"></v-text-field>
 							</v-row>
 						</v-container>
 						<small>*indicates required field</small>
