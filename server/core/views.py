@@ -27,6 +27,19 @@ def get_user(request, id):
     return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def authenticate_user(request):
+    data = JSONParser().parse(request)
+
+    try:
+        user = User.objects.get(
+            username=data['username'], password=data['password'])
+    except User.DoesNotExist:
+        return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response({"data": "Authenticated"}, status=status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 def create_user(request):
 
