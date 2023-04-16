@@ -18,6 +18,9 @@ export default new Vuex.Store({
 		setCurrentUser: (state, payload) => {
 			state.currentUser = payload;
 		},
+		clearUser: (state) => {
+			state.currentUser = { username: "", password: "" };
+		},
 	},
 	actions: {
 		async createUser(context, payload) {
@@ -39,6 +42,10 @@ export default new Vuex.Store({
 				.catch((err) => {
 					console.log(err.message);
 				});
+		},
+		clearUser(context) {
+			context.commit("clearUser");
+			router.push("login");
 		},
 	},
 	modules: {},

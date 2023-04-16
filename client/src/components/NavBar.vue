@@ -3,7 +3,7 @@
 		<v-toolbar flat>
 			<v-toolbar-title>Yo</v-toolbar-title>
 			<v-spacer></v-spacer>
-			<v-btn v-if="signedIn" text dark color="red">Sign out</v-btn>
+			<v-btn v-if="signedIn" @click="signOut" text dark color="red">Sign out</v-btn>
 		</v-toolbar>
 	</nav>
 </template>
@@ -13,7 +13,11 @@ export default {
 	data() {
 		return {};
 	},
-	methods: {},
+	methods: {
+		signOut() {
+			this.$store.dispatch("clearUser");
+		},
+	},
 	computed: {
 		signedIn() {
 			if (this.$store.state.currentUser.username === "") {
