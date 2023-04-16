@@ -1,6 +1,7 @@
 import { HTTP } from "@/api/api";
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router/index";
 
 Vue.use(Vuex);
 
@@ -19,10 +20,11 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		createUser: (context, payload) => {
-			HTTP.post("/create", { ...payload })
+		async createUser(context, payload) {
+			await HTTP.post("/create", { ...payload })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
+					router.push("home");
 				})
 				.catch((err) => {
 					console.log(err.message);
