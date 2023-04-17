@@ -27,7 +27,7 @@ export default new Vuex.Store({
 			await HTTP.post("/users/create", { ...payload })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					// router.push("home");
+					router.push("home");
 				})
 				.catch((err) => {
 					console.log(err.response.data.error.username[0]);
