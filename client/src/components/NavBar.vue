@@ -1,5 +1,11 @@
 <template>
 	<nav>
+		<v-snackbar v-model="snackbar" :timeout="3000" color="primary">
+			{{ text }}
+			<template v-slot:action="{ attrs }">
+				<v-btn color="white" v-bind="attrs" text @click="snackbar = false"> Close </v-btn>
+			</template>
+		</v-snackbar>
 		<v-toolbar flat>
 			<v-toolbar-title>Yo</v-toolbar-title>
 			<v-spacer></v-spacer>
@@ -11,7 +17,10 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			snackbar: false,
+			text: "",
+		};
 	},
 	methods: {
 		signOut() {

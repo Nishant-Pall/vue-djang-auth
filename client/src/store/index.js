@@ -27,10 +27,10 @@ export default new Vuex.Store({
 			await HTTP.post("/users/create", { ...payload })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					router.push("home");
+					// router.push("home");
 				})
 				.catch((err) => {
-					console.log(err.message);
+					console.log(err.response.data.error.username[0]);
 				});
 		},
 		async authenticateUser(context, payload) {
@@ -40,7 +40,7 @@ export default new Vuex.Store({
 					router.push("home");
 				})
 				.catch((err) => {
-					console.log(err.message);
+					console.log(err.response.data.error);
 				});
 		},
 		clearUser(context) {
