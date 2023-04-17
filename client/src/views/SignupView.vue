@@ -49,15 +49,16 @@ export default {
 		submitForm() {
 			if (this.$refs.form.validate()) {
 				this.loading = true;
-				this.$store
-					.dispatch("createUser", { username: this.username, password: this.password })
-					.catch((err) => {
-						console.log(err);
-					})
-					.finally(() => {
-						this.loading = false;
-					});
+				this.$store.dispatch("createUser", {
+					username: this.username,
+					password: this.password,
+					confirmCallBack: this.redirectToHome,
+				});
+				this.loading = false;
 			}
+		},
+		redirectToHome() {
+			this.$router.push("home");
 		},
 	},
 };

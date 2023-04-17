@@ -37,14 +37,15 @@ export default {
 	methods: {
 		submitForm() {
 			this.loading = true;
-			this.$store
-				.dispatch("authenticateUser", { username: this.username, password: this.password })
-				.catch((err) => {
-					console.log(err);
-				})
-				.finally(() => {
-					this.loading = false;
-				});
+			this.$store.dispatch("authenticateUser", {
+				username: this.username,
+				password: this.password,
+				confirmCallBack: this.redirectToHome,
+			});
+			this.loading = false;
+		},
+		redirectToHome() {
+			this.$router.push("home");
 		},
 	},
 };

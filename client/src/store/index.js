@@ -24,20 +24,20 @@ export default new Vuex.Store({
 	},
 	actions: {
 		async createUser(context, payload) {
-			await HTTP.post("/users/create", { ...payload })
+			await HTTP.post("/users/create", { username: payload.username, password: payload.password })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					router.push("home");
+					payload.confirmCallBack();
 				})
 				.catch((err) => {
 					console.log(err.response.data.error.username[0]);
 				});
 		},
 		async authenticateUser(context, payload) {
-			await HTTP.post("/users/authenticate", { ...payload })
+			await HTTP.post("/users/authenticate", { username: payload.username, password: payload.password })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					router.push("home");
+					payload.confirmCallBack();
 				})
 				.catch((err) => {
 					console.log(err.response.data.error);
