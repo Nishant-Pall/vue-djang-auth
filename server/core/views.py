@@ -31,10 +31,14 @@ def get_user(request, id):
 def authenticate_user(request):
     data = JSONParser().parse(request)
     try:
-        user = User.objects.get(
-            username=data['username'], password=data['password'])
+        user = User.objects.get(username=data['username'])
+
     except User.DoesNotExist:
         return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = UserSerializer(user)
+    if(serializer['password'].value != data['password']):
+        return Response({"error": "Invalid password"}, status=status.HTTP_404_NOT_FOUND)
 
     return Response({"data": "Authenticated"}, status=status.HTTP_200_OK)
 
