@@ -27,20 +27,24 @@ export default new Vuex.Store({
 			await HTTP.post("/users/create", { username: payload.username, password: payload.password })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					payload.confirmCallBack();
+					if (payload.confirmCallBack) {
+						payload.confirmCallBack();
+					}
 				})
 				.catch((err) => {
-					console.log(err.response.data.error.username[0]);
+					console.log(err);
 				});
 		},
 		async authenticateUser(context, payload) {
 			await HTTP.post("/users/authenticate", { username: payload.username, password: payload.password })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
-					payload.confirmCallBack();
+					if (payload.confirmCallBack) {
+						payload.confirmCallBack();
+					}
 				})
 				.catch((err) => {
-					console.log(err.response.data.error);
+					console.log(err);
 				});
 		},
 		clearUser(context) {
