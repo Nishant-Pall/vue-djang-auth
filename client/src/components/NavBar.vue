@@ -39,7 +39,11 @@ export default {
 	},
 	computed: {
 		signedIn() {
-			if (this.$store.state.currentUser.username === "") {
+			if (
+				this.$store.state.currentUser.username === "" ||
+				this.$route.name === "login" ||
+				this.$route.name === "signup"
+			) {
 				return false;
 			}
 			return true;
