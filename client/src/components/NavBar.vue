@@ -28,6 +28,7 @@ export default {
 	methods: {
 		signOut() {
 			this.$store.dispatch("clearUser");
+			this.$router.push("login");
 		},
 		onRegister() {
 			if (this.$route.name === "signup") {

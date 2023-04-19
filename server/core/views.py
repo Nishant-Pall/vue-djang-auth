@@ -28,7 +28,7 @@ def get_user(request, id):
 
 
 @api_view(['POST'])
-def authenticate_user(request):
+def login_user(request):
     data = JSONParser().parse(request)
     try:
         user = User.objects.get(username=data['username'])

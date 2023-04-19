@@ -1,7 +1,7 @@
 import { HTTP } from "@/api/api";
 import Vue from "vue";
 import Vuex from "vuex";
-import router from "../router/index";
+import auth from "./auth.module";
 
 Vue.use(Vuex);
 
@@ -36,7 +36,7 @@ export default new Vuex.Store({
 				});
 		},
 		async authenticateUser(context, payload) {
-			await HTTP.post("/users/authenticate", { username: payload.username, password: payload.password })
+			await HTTP.post("/users/login", { username: payload.username, password: payload.password })
 				.then(() => {
 					context.commit("setCurrentUser", payload);
 					if (payload.confirmCallBack) {
@@ -49,8 +49,9 @@ export default new Vuex.Store({
 		},
 		clearUser(context) {
 			context.commit("clearUser");
-			router.push("login");
 		},
 	},
-	modules: {},
+	modules: {
+		auth,
+	},
 });
