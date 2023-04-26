@@ -6,9 +6,12 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
-new Vue({
+// eslint-disable-next-line no-unused-vars
+var vm = new Vue({
 	vuetify,
 	router,
 	store,
 	render: (h) => h(App),
 }).$mount("#app");
+
+window.$appRef = vm;
