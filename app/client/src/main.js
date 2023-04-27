@@ -8,7 +8,6 @@ import "./components/__global";
 
 Vue.config.productionTip = false;
 
-// eslint-disable-next-line no-unused-vars
 var vm = new Vue({
 	vuetify,
 	router,
