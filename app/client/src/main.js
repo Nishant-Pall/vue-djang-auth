@@ -4,6 +4,8 @@ import vuetify from "./plugins/vuetify";
 import router from "./router";
 import store from "./store";
 
+import "./components/__global";
+
 Vue.config.productionTip = false;
 
 // eslint-disable-next-line no-unused-vars
